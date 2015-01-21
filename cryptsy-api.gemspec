@@ -6,8 +6,8 @@ require 'cryptsy/api/version'
 Gem::Specification.new do |spec|
   spec.name          = "cryptsy-api"
   spec.version       = Cryptsy::API::VERSION
-  spec.authors       = ["Nic Barthelemy"]
-  spec.email         = ["nbarthel@axomi.com"]
+  spec.authors       = ["Jefferson Sampaul"]
+  spec.email         = ["json6420@gmail.com"]
   spec.description   = %q{A ruby implementation of the Cryptsy API}
   spec.summary       = %q{Covers all API calls at http://www.cryptsy.com/pages/api}
   spec.homepage      = ""
