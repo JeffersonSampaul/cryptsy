@@ -17,10 +17,10 @@ module Cryptsy
 
         begin
           response = self.class.get("/api.php", query: query)
-          response_body = JSON.parse(response)
+          response_body = JSON.parse(response.body)
           response = [true, response_body]
         rescue => e
-          response = [false, e]
+          response = [false, e.response]
         end
 
         response
@@ -47,10 +47,10 @@ module Cryptsy
                                     "Key" => @key,
                            },
                            body: post_data)
-          response_body = JSON.parse(response)
+          response_body = JSON.parse(response.body)
           response = [true, response_body]
         rescue => e
-          response = [false, e]
+          response = [false, e.response]
         end
 
         response
