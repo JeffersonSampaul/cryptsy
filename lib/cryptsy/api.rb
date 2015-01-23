@@ -16,14 +16,13 @@ module Cryptsy
         query["marketid"] = marketid if marketid
 
         begin
-          response = self.class.get("/api.php", query: query)
-          parsed_response = JSON.parse(response)
-          result = [true, response]
+          response_body = JSON.parse(response.body)
+          response = [true, response]
         rescue => e
-          result = [false, e.response]
+          response = [false, e.response]
         end
 
-        result
+        response
       end
     end
 
@@ -40,20 +39,20 @@ module Cryptsy
         post_data = {method: method_name, nonce: nonce}.merge(params)
         post_body = URI.encode_www_form(post_data)
 
-        begin
-          response = self.class.post("/api",
+        response = self.class.post("/api",
                            headers: { "User-Agent" => "Mozilla/4.0 (compatible; Cryptsy API ruby client)",
                                     "Sign" => signed_message(post_body),
                                     "Key" => @key,
                            },
                            body: post_data)
-          parsed_response = JSON.parse(response)
-          result = [true, response]
+        begin
+          response_body = JSON.parse(response.body)
+          response = [true, response]
         rescue => e
-          result = [false, e.response]
+          response = [false, e.response]
         end
 
-        result
+        response
       end
 
       def auth_changed?(key, secret)
