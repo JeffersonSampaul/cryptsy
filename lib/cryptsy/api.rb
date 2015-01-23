@@ -17,13 +17,13 @@ module Cryptsy
 
         begin
           response = self.class.get("/api.php", query: query)
-          response = JSON.parse(response)
-          response = [true, response]
+          parsed_response = JSON.parse(response)
+          result = [true, response]
         rescue => e
-          response = [false, e.response]
+          result = [false, e.response]
         end
 
-        response
+        result
       end
     end
 
@@ -47,13 +47,13 @@ module Cryptsy
                                     "Key" => @key,
                            },
                            body: post_data)
-          response = JSON.parse(response)
-          response = [true, response]
+          parsed_response = JSON.parse(response)
+          result = [true, response]
         rescue => e
-          response = [false, e.response]
+          result = [false, e.response]
         end
 
-        response
+        result
       end
 
       def auth_changed?(key, secret)
